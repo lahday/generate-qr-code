@@ -54,10 +54,19 @@ export default {
   computed: {
     ...mapState(['disabledButton'])
   },
+  // mounted: {
+  //   if(QrValue) {
+  //     fetch('https://qrtag.net/api/qr_4.png?url=${QrValue}')
+  //     .then((response)=> response.json())
+  //     .then((data) => {
+  //           QrValue=data
+  //         })
+  //   }
+  // },
   methods: {
     ...mapMutations(['getQrCode']),
     handleQrModal () {
-        if (this.QrValue) {
+      if (this.QrValue) {
           fetch('https://qrtag.net/api/qr_4.png?url=${QrValue}')
           .then((response)=> response.json())
           .then((data) => {
@@ -70,6 +79,8 @@ export default {
   }
 }
 </script>
+ 
+
 
 <style scoped>
 /* .bg-img {
