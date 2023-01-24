@@ -21,15 +21,15 @@
           class="border-2 mt-5 px-2 py-2 rounded-lg md:w-1/3 outline-none text-black">
           <div>
             <button :disabled="disabledButton"
-            @click="handleGenerateQr" class="bg-primary  text-secondary mt-5 px-10 py-3 text-center rounded-md  font-semibold"> Generate Qr Code </button>
+            @click="handleQrModal" class="bg-primary  text-secondary mt-5 px-10 py-3 text-center rounded-md  font-semibold"> Generate Qr Code </button>
           </div>
         </form>
       </div>
       </div>
     </div>
   
-    <div v-if="GenerateQr">
-      <QrModal />
+    <div v-if="showModal">
+      <QrModal @close="handleQrModal" />
     </div>
   </section>
 </template>
@@ -47,8 +47,8 @@ export default {
   data () {
     return {
       landingImg,
-      QrValue: '',
-      GenerateQr: false,
+      QrValue: null,
+      showModal: false,
     }
   },
   computed: {
@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     ...mapMutations(['getQrCode']),
-    handleGenerateQr () {
+    handleQrModal () {
         if (this.QrValue) {
           fetch('https://qrtag.net/api/qr_4.png?url=${QrValue}')
           .then((response)=> response.json())
@@ -64,7 +64,7 @@ export default {
             this.QrValue=data
           })
       }
-      this.GenerateQr = !this.GenerateQr
+      this.showModal = !this.showModal
       this.getQrCode(this.QrValue)
     }
   }

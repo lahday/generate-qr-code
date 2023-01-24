@@ -1,9 +1,10 @@
 <template>
-  <div class="bg-secondary w-400 h-2/3 m-auto border-2 round-md border-primary fixed top-0 right-2 inset-0 flex justify-center flex-col">
+  <div @click="closeModal"
+  class="bg-secondary w-300 h-1/2 md:w-400 md:h-2/3 m-auto border-0 md:border-2 round-md border-secondary md:border-primary fixed top-0 right-2 inset-0 flex justify-center flex-col">
     <div> 
       <!-- <p class="float-right px-5 font-semibold text-2xl">X</p> -->
       <font-awesome-icon icon="fa-sharp fa-solid fa-xmark" class="float-right" />
-      <img :src="`https://qrtag.net/api/qr_4.png?url=${QrValue}`" alt="qrtag" class="m-auto w-2/3 pt-6 px-2 pb-3">
+      <img :src="`https://qrtag.net/api/qr_4.png?url=${QrValue}`" alt="qrtag" class="m-auto w-1/2 md:w-2/3 pt-6 px-2 pb-3">
     </div>
     <div class="flex justify-evenly"> 
       <p class="text-justify">Download</p>
@@ -15,7 +16,12 @@
 
 <script>
 export default {
-  props: ['QrValue']
+  props: ['QrValue'],
+  methods: {
+    closeModal () {
+      this.$emit('close')
+    }
+  }
 }
 </script>
 
