@@ -47,7 +47,7 @@ export default {
   data () {
     return {
       landingImg,
-      QrValue: null,
+      QrValue: '',
       showModal: false,
     }
   },
@@ -75,7 +75,9 @@ export default {
       }
       this.showModal = !this.showModal
       this.getQrCode(this.QrValue)
-    }
+      this.QrValue=''
+    }, 
+    
   }
 }
 </script>
