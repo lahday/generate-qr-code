@@ -7,8 +7,8 @@
       <img :src="`https://qrtag.net/api/qr_4.png?url=${QrValue}`" alt="qrtag" class="m-auto w-1/2 md:w-2/3 pt-6 px-2 pb-3">
     </div>
     <div class="flex justify-evenly"> 
-      <p class="text-justify">Download</p>
-      <p>Share </p>
+      <button class="px-3 py-2 rounded-md mr-2">Download</button>
+      <button class="px-3 py-3 rounded">Share </button>
          </div>
    
   </div>

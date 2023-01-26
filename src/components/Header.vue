@@ -32,6 +32,7 @@ class="flex flex-col md:flex-row justify-between items-center px-5 bg-gray borde
   <p>
     <router-link to="/viewall"
     @click="makeCurrent('viewAllQr')"
+    class="view-qr"
     :class="{current: viewAllQr}"> 
       View All Qr
     </router-link>
@@ -50,13 +51,9 @@ class="flex flex-col md:flex-row justify-between items-center px-5 bg-gray borde
 </template>
 
 <script>
-// import { Slide } from 'vue-burger-menu' 
 
 export default {
   name: 'Header',
-  component: {
-    // Slide 
-  },
   data () {
     return {
       home: true,
@@ -84,8 +81,8 @@ export default {
 
 <style scoped>
 .current{
-  cursor: pointer;
-  color: #6F50B5;
+  cursor: pointer !important;
+  color: #6F50B5 !important;
 }
  i {
   display: none;

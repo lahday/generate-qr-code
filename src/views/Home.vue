@@ -1,7 +1,7 @@
 <template>
   <section class="h-screen w-full">
     <!-- backgroung image and url secttion -->
-    <div class="bg-img h-screen w-full">
+    <div class="bg-img h-screen w-full" :class="{ makeGray : isNotActive}">
       <div 
       class="bg-no-repeat h-screen w-full"
       :style="{
@@ -12,12 +12,13 @@
       <div class="text-secondary pt-10 px-8"> 
       <p class="text-5xl py-5 font-bold mt-3">Generate Qr Code</p>
         <p class="md:w-1/3 py-5">Get a Qr code in two minutes,Lorem ipsum dolor sit amet, consectetur adipisicing elit.  deserunt delectus optio, test out for free.</p>
-        <form @submit.prevent>
+        <form @submit.prevent data-test="form">
           <input type="url" 
           v-model="QrValue"
           placeholder="Enter your url" 
           ref="url"
           required
+          data-test="Qrvalue"
           class="border-2 mt-5 px-2 py-2 rounded-lg md:w-1/3 outline-none text-black">
           <div>
             <button :disabled="disabledButton"
@@ -49,6 +50,7 @@ export default {
       landingImg,
       QrValue: '',
       showModal: false,
+      isNotActive: false
     }
   },
   computed: {
@@ -66,6 +68,10 @@ export default {
   methods: {
     ...mapMutations(['getQrCode']),
     handleQrModal () {
+      this.showModal = !this.showModal
+      this.isNotActive = !this.isNotActive
+      this.getQrCode(this.QrValue)
+      this.QrValue=''
       if (this.QrValue) {
           fetch('https://qrtag.net/api/qr_4.png?url=${QrValue}')
           .then((response)=> response.json())
@@ -73,9 +79,7 @@ export default {
             this.QrValue=data
           })
       }
-      this.showModal = !this.showModal
-      this.getQrCode(this.QrValue)
-      this.QrValue=''
+  
     }, 
     
   }
@@ -85,12 +89,8 @@ export default {
 
 
 <style scoped>
-/* .bg-img {
-  background: url("@/assets/images/qr-landing.svg");
-} */
-/* @media screen and (max-width) {
-  .bg-text {
-    display: hidden;
-  }
-} */
+.makeGray{ 
+  background: gray !important;
+  opacity: 0.3;
+}
 </style>

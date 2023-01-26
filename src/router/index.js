@@ -14,6 +14,12 @@ const routes = [
     path: '/viewall',
     name: 'QrList',
     component: ViewAllQr
+  },
+  {
+    path: '/home/qrmodal',
+    name: 'QrModal',
+    component: () => import ('@/components/QrModal')
+
   }
 ]
 
