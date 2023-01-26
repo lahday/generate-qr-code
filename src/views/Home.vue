@@ -21,22 +21,22 @@
               v-model="QrValue"
               placeholder="Enter your url"
               ref="url"
-              required
               data-test="Qrvalue"
               class="border-2 mt-5 px-2 py-2 rounded-lg md:w-1/3 outline-none text-black"
               @input="checkInput"
             />
             <p v-if="err" class="text-red-400 text-xs">{{ err }}</p>
+            <div>
+              <button
+                type="submit"
+                :disabled="disabledButton"
+                @click="handleQrModal"
+                class="bg-primary text-secondary mt-5 px-10 py-3 text-center rounded-md font-semibold"
+              >
+                Generate Qr Code
+              </button>
+            </div>
           </form>
-          <div>
-            <button
-              :disabled="disabledButton"
-              @click="handleQrModal"
-              class="bg-primary text-secondary mt-5 px-10 py-3 text-center rounded-md font-semibold"
-            >
-              Generate Qr Code
-            </button>
-          </div>
         </div>
       </div>
     </div>
@@ -50,6 +50,7 @@
 import QrModal from "@/components/QrModal";
 import landingImg from "@/assets/images/qr-landing.svg";
 import { mapMutations, mapState } from "vuex";
+// import axios from  axios
 
 export default {
   components: {
@@ -67,11 +68,11 @@ export default {
   computed: {
     ...mapState(["disabledButton"]),
   },
-  mounted() {
-    axios
-      .get("https://qrtag.net/api/qr_4.png?url=${QrValue}")
-      .then((response) => (this.QrValue = response));
-  },
+  // mounted() {
+  //   axios
+  //     .get("https://qrtag.net/api/qr_4.png?url=${QrValue}")
+  //     .then((response) => (this.QrValue = response));
+  // },
   methods: {
     ...mapMutations(["getQrCode"]),
     checkInput() {
@@ -88,6 +89,14 @@ export default {
       this.isNotActive = !this.isNotActive;
       this.getQrCode(this.QrValue);
       this.QrValue = "";
+
+      if (this.QrValue) {
+        fetch("https://qrtag.net/api/qr_4.png?url=${QrValue}")
+          .then((response) => response.json())
+          .then((data) => {
+            this.QrValue = data;
+          });
+      }
     },
   },
 };

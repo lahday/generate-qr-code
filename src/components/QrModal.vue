@@ -21,9 +21,9 @@
       <a
         :href="`https://qrtag.net/api/qr_4.png?url=${QrValue}`"
         target="_blank"
-        @click="copyBlobToClipboard"
+        @click="shareBlobToClipboard"
         class="px-3 py-3 rounded"
-        >Copy</a
+        >Share</a
       >
     </div>
   </div>
@@ -40,7 +40,7 @@ export default {
       this.$emit("close");
     },
 
-    copyBlobToClipboardFirefox(href) {
+    shareBlobToClipboardFirefox(href) {
       const img = document.createElement("img");
       img.src = href;
       const div = document.createElement("div");
@@ -52,7 +52,7 @@ export default {
       document.body.removeChild(div);
       return done;
     },
-    copyBlobToClipboard(blob) {
+    shareBlobToClipboard(blob) {
       // eslint-disable-next-line no-undef
       const clipboardItemInput = new ClipboardItem({
         "image/png": blob,
