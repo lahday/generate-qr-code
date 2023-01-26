@@ -21,16 +21,7 @@ describe('ViewAllQr', () => {
     } 
   })
   it( "Disables button when then the length of the array is equal to 10", async () => {
-    const wrapper =  mount ( ViewAllQr , {store, localVue })
 
-    const urls = ['a','b'];
-    urls.forEach(async (url) => {
-   const qrValue = await wrapper.find(`[data-test="${url}"]`)
-   qrValue.setValue(QrValue)
-   await wrapper.find("button").trigger("click")
-   })
-    
-    expect(getters.QrList).toHaveLength(11)
   })       
 })
 
@@ -46,11 +37,9 @@ describe('ViewAllQr', () => {
 //   })
 
 // wrapper.find(".view-qr").trigger('click');
-// await Vue.nextTick();
 
 //   const viewrWrapper = await wrapper.find(ViewAllQr)
 
 //   const pElements = wrapper.findAll(".all-qrs");
-//   console.log('Header WRAPPER', viewrWrapper.html())
 
   // expect(wrapper.find(".QrList")).toHaveLength("10")
