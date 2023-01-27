@@ -22,9 +22,9 @@
               </router-link>
             </p>
           </div>
-          <div class="px-4 text-md font-semibold">
+          <!-- <div class="px-4 text-md font-semibold">
             <p>About</p>
-          </div>
+          </div> -->
           <div class="px-4 text-md font-semibold">
             <p>
               <router-link
@@ -37,9 +37,9 @@
               </router-link>
             </p>
           </div>
-          <div class="px-4 text-md font-semibold">
+          <!-- <div class="px-4 text-md font-semibold">
             <p>Pricing</p>
-          </div>
+          </div> -->
           <div class="pl-3">
             <button
               class="text-md font-semibold border-1 bg-primary text-secondary rounded-md px-4 py-2"

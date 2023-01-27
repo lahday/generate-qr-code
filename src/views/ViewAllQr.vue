@@ -1,12 +1,12 @@
 <template>
-  <div v-if="QrList.length < 1" class="bg-secondary w-full h-full">
+  <div v-if="QrList.length < 1" class="w-full h-full">
     <p class="text-center p-10">You have not Generated any Qr Code</p>
     <img
       :src="require('../assets/images/modal-img.png')"
       class="md:fixed md:inset-0 sm:h-40 m-auto w-40"
     />
   </div>
-  <div v-else class="bg-secondary w-full h-screen">
+  <div v-else class="w-full h-full">
     <div class="flex flex-col justify-center items-center p-3">
       <p class="font-semibold text-xl py-5">
         Welcome, See below the url you have Generated, to Generate more Qrcode
