@@ -1,9 +1,9 @@
 <template>
   <section class="h-screen w-full">
     <!-- backgroung image and url secttion -->
-    <div class="bg-img h-screen w-full" :class="{ makeGray: isNotActive }">
+    <div class="bg-img h-full w-full" :class="{ makeGray: isNotActive }">
       <div
-        class="bg-no-repeat h-screen w-full"
+        class="bg-no-repeat h-full w-full"
         :style="{
           'background-image': `url(${landingImg})`,
           'background-size': 'cover',
@@ -29,19 +29,21 @@
             <div>
               <button
                 type="submit"
-                :disabled="disabledButton"
+                :disabled="disabledButton || !QrValue.length "
                 @click="handleQrModal"
                 class="bg-primary text-secondary mt-5 px-10 py-3 text-center rounded-md font-semibold"
               >
                 Generate Qr Code
               </button>
             </div>
-          </form>
+          </form> 
         </div>
       </div>
     </div>
     <div v-if="showModal">
-      <QrModal @close="handleQrModal" />
+      <QrModal @close="handleQrModal" 
+      :QrValue="QrValue"
+      />
     </div>
   </section>
 </template>
@@ -69,9 +71,13 @@ export default {
     ...mapState(["disabledButton"]),
   },
   // mounted() {
-  //   axios
-  //     .get("https://qrtag.net/api/qr_4.png?url=${QrValue}")
-  //     .then((response) => (this.QrValue = response));
+  //   fetch("https://qrtag.net/api/qr_4.png?url=${QrValue}", {
+  //         method: 'post'
+  //       })
+  //         .then((response) => response.json())
+  //         .then((data) => {
+  //           this.QrValue = data;
+  //         });
   // },
   methods: {
     ...mapMutations(["getQrCode"]),
@@ -89,15 +95,11 @@ export default {
       this.isNotActive = !this.isNotActive;
       this.getQrCode(this.QrValue);
       this.QrValue = "";
-
-      if (this.QrValue) {
-        fetch("https://qrtag.net/api/qr_4.png?url=${QrValue}")
-          .then((response) => response.json())
-          .then((data) => {
-            this.QrValue = data;
-          });
-      }
+      
+      
     },
+
+    
   },
 };
 </script>
